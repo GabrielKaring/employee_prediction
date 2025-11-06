@@ -1,7 +1,5 @@
 pandas
-seaborn
 numpy
 matplotlib
-os
-sklearn
+seaborn
 scikit-learn
