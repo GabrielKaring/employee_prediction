@@ -1,2 +1,2 @@
-# Employee_prediction
-This application leverages the power of Python and data science techniques to predict employee attrition. It analyzes various employee-related data points to identify patterns and predict which employees are most likely to leave the company. This can help organizations proactively address potential attrition issues.
+# Employee Prediction
+Introduces a full data science workflow for employee attrition prediction, including problem formulation, EDA, feature selection, data preprocessing, model training (Logistic Regression, Decision Tree, Random Forest), evaluation, and interpretation. Adds detailed markdown documentation, code for data loading, cleaning, visualization, model comparison, and feature importance analysis.
