@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Dev/Ciencia%20de%20Dados/employee_prediction/mlruns/260599316362678720/models/m-c83f974d9c114bc0a752eba78ff6dd8d/artifacts
+creation_timestamp: 1764110889570
+experiment_id: '260599316362678720'
+last_updated_timestamp: 1764110893772
+model_id: m-c83f974d9c114bc0a752eba78ff6dd8d
+model_type: null
+name: model
+source_run_id: 28a91c92649f4b748c6ac794257c901e
+status: 2
+status_message: null

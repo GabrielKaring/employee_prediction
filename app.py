@@ -3,16 +3,14 @@ from pydantic import BaseModel
 from predict import AttritionPredictor
 import uvicorn
 
-app = FastAPI(title="HR Attrition Prediction API", version="1.0")
+app = FastAPI(title="HR Attrition Prediction API", version="2.0")
 
-# Inicializa o preditor ao iniciar a API
 predictor = None
 try:
     predictor = AttritionPredictor()
 except Exception as e:
     print(f"ERRO DE INICIALIZAÇÃO: {e}")
 
-# Definição do Schema de Entrada
 class EmployeeData(BaseModel):
     DistanceFromHome: int
     EnvironmentSatisfaction: int
@@ -25,21 +23,15 @@ class EmployeeData(BaseModel):
 
 @app.get("/")
 def health_check():
-    if predictor:
-        return {"status": "API is running", "model_loaded": True}
-    return {"status": "API is running", "model_loaded": False, "error": "Model not found"}
+    return {"status": "API online", "model_loaded": predictor is not None}
 
 @app.post("/predict")
 def predict_attrition(data: EmployeeData):
     if not predictor:
-        raise HTTPException(
-            status_code=500, 
-            detail="Modelo não carregado no servidor. Verifique se 'model.pkl' existe."
-        )
+        raise HTTPException(status_code=500, detail="Modelo não carregado.")
     
     try:
-        input_data = data.dict()
-        result = predictor.predict(input_data)
+        result = predictor.predict(data.dict())
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

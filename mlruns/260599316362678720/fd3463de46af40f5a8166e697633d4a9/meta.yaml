@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Dev/Ciencia%20de%20Dados/employee_prediction/mlruns/260599316362678720/fd3463de46af40f5a8166e697633d4a9/artifacts
+end_time: 1764110884469
+entry_point_name: ''
+experiment_id: '260599316362678720'
+lifecycle_stage: active
+run_id: fd3463de46af40f5a8166e697633d4a9
+run_name: Regressão Logística
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764110866004
+status: 3
+tags: []
+user_id: gabhe

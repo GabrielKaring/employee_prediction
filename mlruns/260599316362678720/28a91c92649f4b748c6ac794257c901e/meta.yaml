@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Dev/Ciencia%20de%20Dados/employee_prediction/mlruns/260599316362678720/28a91c92649f4b748c6ac794257c901e/artifacts
+end_time: 1764110893803
+entry_point_name: ''
+experiment_id: '260599316362678720'
+lifecycle_stage: active
+run_id: 28a91c92649f4b748c6ac794257c901e
+run_name: Random Forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764110889213
+status: 3
+tags: []
+user_id: gabhe

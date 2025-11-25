@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Dev/Ciencia%20de%20Dados/employee_prediction/mlruns/260599316362678720/models/m-c83f974d9c114bc0a752eba78ff6dd8d/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.6.0
+model_id: m-c83f974d9c114bc0a752eba78ff6dd8d
+model_size_bytes: 3677112
+model_uuid: m-c83f974d9c114bc0a752eba78ff6dd8d
+prompts: null
+run_id: 28a91c92649f4b748c6ac794257c901e
+utc_time_created: '2025-11-25 22:48:09.691376'
