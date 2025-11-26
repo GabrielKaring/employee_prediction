@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predição de Rotatividade (HR)</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text: #1f2937;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: var(--card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 { text-align: center; color: var(--primary); margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box; 
+            font-size: 1rem;
+        }
+        
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 1rem;
+        }
+        button:hover { background-color: #1d4ed8; }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            display: none; 
+        }
+        /* Estilos para os níveis de risco */
+        .result-safe { background-color: #d1fae5; color: #065f46; border: 1px solid #34d399; } /* Verde */
+        
+        /* */
+        .result-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+        
+        .result-danger { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; } /* Vermelho */
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Análise de Rotatividade</h1>
+    <form id="predictionForm">
+        
+        <div class="form-group">
+            <label>Distância de Casa (Km)</label>
+            <input type="number" id="DistanceFromHome" required min="1" value="10">
+        </div>
+
+        <div class="form-group">
+            <label>Satisfação com Ambiente (1-4)</label>
+            <select id="EnvironmentSatisfaction">
+                <option value="1">1 - Baixa</option>
+                <option value="2">2 - Média</option>
+                <option value="3">3 - Alta</option>
+                <option value="4">4 - Muito Alta</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Satisfação no Trabalho (1-4)</label>
+            <select id="JobSatisfaction">
+                <option value="1">1 - Baixa</option>
+                <option value="2">2 - Média</option>
+                <option value="3">3 - Alta</option>
+                <option value="4">4 - Muito Alta</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Anos na Empresa</label>
+            <input type="number" id="YearsAtCompany" required min="0" value="2">
+        </div>
+
+        <div class="form-group">
+            <label>Equilíbrio Vida/Trabalho (1-4)</label>
+            <select id="WorkLifeBalance">
+                <option value="1">1 - Ruim</option>
+                <option value="2">2 - Bom</option>
+                <option value="3">3 - Muito Bom</option>
+                <option value="4">4 - Excelente</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>% Aumento Salarial</label>
+            <input type="number" id="PercentSalaryHike" required min="0" value="11">
+        </div>
+
+        <div class="form-group">
+            <label>Anos no Cargo Atual</label>
+            <input type="number" id="YearsInCurrentRole" required min="0" value="1">
+        </div>
+
+        <div class="form-group">
+            <label>Anos desde Última Promoção</label>
+            <input type="number" id="YearsSinceLastPromotion" required min="0" value="0">
+        </div>
+
+        <button type="submit">Calcular Risco</button>
+    </form>
+
+    <div id="resultArea" class="result-box">
+        <h3 id="resultTitle"></h3>
+        <p id="resultProb"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const btn = document.querySelector('button');
+        btn.textContent = "Calculando...";
+        btn.disabled = true;
+
+        const data = {
+            DistanceFromHome: parseInt(document.getElementById('DistanceFromHome').value),
+            EnvironmentSatisfaction: parseInt(document.getElementById('EnvironmentSatisfaction').value),
+            JobSatisfaction: parseInt(document.getElementById('JobSatisfaction').value),
+            YearsAtCompany: parseInt(document.getElementById('YearsAtCompany').value),
+            WorkLifeBalance: parseInt(document.getElementById('WorkLifeBalance').value),
+            PercentSalaryHike: parseInt(document.getElementById('PercentSalaryHike').value),
+            YearsInCurrentRole: parseInt(document.getElementById('YearsInCurrentRole').value),
+            YearsSinceLastPromotion: parseInt(document.getElementById('YearsSinceLastPromotion').value)
+        };
+
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            const resultArea = document.getElementById('resultArea');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultProb = document.getElementById('resultProb');
+            
+            // Pega a probabilidade bruta (0.0 a 1.0)
+            const prob = result.probability;
+
+            // Mostra a caixa de resultado
+            resultArea.style.display = 'block';
+            // Remove classes antigas para não misturar cores
+            resultArea.classList.remove('result-safe', 'result-warning', 'result-danger');
+
+            // --- NOVA LÓGICA JS (Baseada no seu Python) ---
+            // Se > 0.8 (80%) -> Alto (Vermelho)
+            if (prob > 0.8) {
+                resultArea.classList.add('result-danger');
+                resultTitle.textContent = "Risco Crítico/Alto de Saída";
+            } 
+            // Se > 0.4 (40%) E menor/igual a 0.8 -> Médio (Amarelo)
+            else if (prob > 0.4) {
+                resultArea.classList.add('result-warning');
+                resultTitle.textContent = "Risco Médio de Saída";
+            } 
+            // Caso contrário (<= 0.4) -> Baixo (Verde)
+            else {
+                resultArea.classList.add('result-safe');
+                resultTitle.textContent = "Risco Baixo (Provavelmente Fica)";
+            }
+
+            // Mostra a porcentagem formatada
+            resultProb.textContent = `Probabilidade calculada: ${(prob * 100).toFixed(1)}%`;
+
+        } catch (error) {
+            alert("Erro ao conectar com a API.");
+            console.error(error);
+        } finally {
+            btn.textContent = "Calcular Risco";
+            btn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>

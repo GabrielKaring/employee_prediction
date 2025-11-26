@@ -29,7 +29,7 @@ class AttritionPredictor:
             "prediction": int(prediction[0]),
             "probability": float(probability[0]),
             "status": status,
-            "risk_level": "Alto" if probability[0] > 0.6 else "Médio" if probability[0] > 0.4 else "Baixo"
+            "risk_level": "Alto" if probability[0] > 0.8 else "Médio" if probability[0] > 0.4 else "Baixo"
         }
 
 if __name__ == "__main__":
