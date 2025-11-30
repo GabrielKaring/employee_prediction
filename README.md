@@ -197,18 +197,6 @@ Preprocessamento acoplado
 
 | Docker Container   |   
 
-🧩 Possíveis Extensões Futuras
-
-Deploy em nuvem (AWS, Azure, GCP).
-
-Monitoramento com Prometheus + Grafana.
-
-Pipeline CI/CD automatizado (GitHub Actions).
-
-Drift detection.
-
-Testes unitários automáticos.
-
 📜 Licença
 
 Este projeto é destinado a fins educacionais.
