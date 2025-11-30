@@ -179,19 +179,23 @@ Modelo escolhido automaticamente
 Preprocessamento acoplado
 
 📈 Fluxo da Solução (MLOps Simplificado)
-┌────────────────────┐
 │ Notebook (N2)      │
+
 │ train.py           │
+
 │ + MLflow Logs      │
+
 │ model.pkl          |
+
 │ predict.py         │
+
 │ (inferência)       │
+
 │ FastAPI            │
+
 │ app.py             │
-└─────────┬──────────┘
-┌────────────────────┐
-│ Docker Container   │
-└────────────────────┘
+
+| Docker Container   |   
 
 🧩 Possíveis Extensões Futuras
 
