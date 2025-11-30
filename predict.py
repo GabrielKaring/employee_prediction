@@ -16,10 +16,8 @@ class AttritionPredictor:
         self.model = joblib.load(model_path)
 
     def predict(self, data: dict):
-        # Converte dicionário para DataFrame
         df_input = pd.DataFrame([data])
         
-        # O pipeline cuida do StandardScaler automaticamente se necessário
         prediction = self.model.predict(df_input)
         probability = self.model.predict_proba(df_input)[:, 1]
         

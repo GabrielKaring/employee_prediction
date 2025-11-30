@@ -73,7 +73,7 @@ Para executar localmente:
 🚀 Como Executar o Projeto
 1️⃣ Criar ambiente virtual (opcional, recomendado)
 python -m venv venv
-source venv/bin/activate # Linux / Mac
+
 venv\Scripts\activate # Windows
 
 2️⃣ Instalar dependências
@@ -179,23 +179,44 @@ Modelo escolhido automaticamente
 Preprocessamento acoplado
 
 📈 Fluxo da Solução (MLOps Simplificado)
-│ Notebook (N2)      │
+┌────────────────────┐
+│ Notebook (N2) │
+└─────────┬──────────┘
+│
+▼
+┌────────────────────┐
+│ train.py │
+│ + MLflow Logs │
+└─────────┬──────────┘
+│ model.pkl
+▼
+┌────────────────────┐
+│ predict.py │
+│ (inferência) │
+└─────────┬──────────┘
+│
+▼
+┌────────────────────┐
+│ FastAPI │
+│ app.py │
+└─────────┬──────────┘
+│
+▼
+┌────────────────────┐
+│ Docker Container │
+└────────────────────┘
 
-│ train.py           │
+🧩 Possíveis Extensões Futuras
 
-│ + MLflow Logs      │
+Deploy em nuvem (AWS, Azure, GCP).
 
-│ model.pkl          |
+Monitoramento com Prometheus + Grafana.
 
-│ predict.py         │
+Pipeline CI/CD automatizado (GitHub Actions).
 
-│ (inferência)       │
+Drift detection.
 
-│ FastAPI            │
-
-│ app.py             │
-
-| Docker Container   |   
+Testes unitários automáticos.
 
 📜 Licença
 

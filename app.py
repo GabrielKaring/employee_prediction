@@ -1,22 +1,19 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles # <--- NOVO IMPORTE
-from fastapi.responses import FileResponse # <--- NOVO IMPORTE
+from fastapi.staticfiles import StaticFiles 
+from fastapi.responses import FileResponse 
 from pydantic import BaseModel
 from predict import AttritionPredictor
 import uvicorn
 
 app = FastAPI(title="HR Attrition Prediction API", version="2.0")
 
-# --- NOVO BLOCO: Configuração de Arquivos Estáticos ---
-# Isso permite que o HTML acesse CSS/JS se você separar arquivos no futuro
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get("/") # <--- MUDAMOS A ROTA RAIZ
+@app.get("/") 
 def read_root():
-    # Retorna o arquivo HTML que criamos
+    
     return FileResponse('static/index.html')
-
-# ... (Mantenha o resto do código de inicialização do predictor e classes iguais) ...
 
 predictor = None
 try:
