@@ -73,14 +73,17 @@ Para executar localmente:
 ✔️ Docker Desktop instalado e ativo
 🚀 Como Executar o Projeto
 1️⃣ Criar ambiente virtual (opcional, recomendado)
+
 python -m venv venv
 
 venv\Scripts\activate # Windows
 
 2️⃣ Instalar dependências
+
 pip install -r requirements.txt
 
 3️⃣ Treinar o modelo (OBRIGATÓRIO antes do Docker)
+
 python train.py
 
 Isso irá:
@@ -91,9 +94,11 @@ Isso irá:
 ✔️ Salvar o melhor modelo como model.pkl
 
 4️⃣ Construir a imagem Docker
+
 docker build -t hr-attrition-api .
 
 5️⃣ Executar o container
+
 docker run -p 8000:8000 hr-attrition-api
 
 API disponível em:
