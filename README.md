@@ -1,4 +1,4 @@
-README.md — Projeto MLOps: Predição de Rotatividade de Funcionários (Employee Attrition)
+Projeto MLOps: Predição de Rotatividade de Funcionários (Employee Attrition)
 
 Este projeto apresenta uma solução completa de Machine Learning + MLOps para prever a probabilidade de um funcionário deixar a empresa (employee attrition).
 Toda a solução foi construída com Python, FastAPI, MLflow e Docker, seguindo boas práticas de modularização, versionamento de modelos e padronização do ambiente.
