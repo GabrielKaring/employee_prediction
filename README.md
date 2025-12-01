@@ -63,6 +63,7 @@ WorkLifeBalance Equilíbrio vida–trabalho
 PercentSalaryHike Aumento salarial (%)
 YearsInCurrentRole Tempo no cargo atual
 YearsSinceLastPromotion Anos desde última promoção
+
 🛠️ Pré-requisitos
 
 Para executar localmente:
